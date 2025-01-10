@@ -15,6 +15,8 @@
             <option value="$PROJECT_DIR$/data/product" />
             <option value="$PROJECT_DIR$/domain" />
             <option value="$PROJECT_DIR$/domain/product" />
+            <option value="$PROJECT_DIR$/feature" />
+            <option value="$PROJECT_DIR$/feature/productList" />
           </set>
         </option>
       </GradleProjectSettings>
