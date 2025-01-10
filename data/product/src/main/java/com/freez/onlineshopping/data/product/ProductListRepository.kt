@@ -1,3 +1,8 @@
 package com.freez.onlineshopping.data.product
 
-class ProductListRepository {}
+import com.freez.onlineshopping.domain.product.model.Product
+import kotlinx.coroutines.flow.Flow
+
+interface ProductListRepository {
+    suspend fun getAllProducts(): Flow<List<Product>>
+}

@@ -11,3 +11,7 @@ kotlin {
         jvmTarget = org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_11
     }
 }
+dependencies{
+    implementation(project(":domain:product"))
+    implementation(libs.kotlinx.coroutines.android)
+}
