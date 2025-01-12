@@ -12,6 +12,5 @@ kotlin {
     }
 }
 dependencies{
-    implementation(project(":domain:product"))
     implementation(libs.kotlinx.coroutines.android)
 }
