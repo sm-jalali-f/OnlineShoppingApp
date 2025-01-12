@@ -34,8 +34,8 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.hilt.navigation.compose.hiltViewModel
 import coil3.compose.rememberAsyncImagePainter
+import com.freez.onlineShopping.feature.productlist.ProductListViewModel
 import com.freez.onlineshopping.domain.product.model.Product
 
 @Composable
@@ -56,7 +56,7 @@ fun ProductListScreen(viewModel: ProductListViewModel) {
 @Composable
 fun ProductListScreenPreview() {
     Text(text = "salam")
-    val viewModel: ProductListViewModel = hiltViewModel()
+//    val viewModel: ProductListViewModel = hiltViewModel()
 //    // Create mock data for preview
 //    val mockViewModel = object : ProductListViewModel {
 //        override val products: StateFlow<List<Product>> = MutableStateFlow(
