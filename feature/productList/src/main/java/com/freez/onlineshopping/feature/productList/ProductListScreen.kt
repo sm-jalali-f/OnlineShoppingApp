@@ -1,5 +1,6 @@
 package com.freez.onlineshopping.feature.productList
 
+import android.util.Log
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -35,16 +36,17 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import androidx.lifecycle.viewmodel.compose.viewModel
 import coil3.compose.rememberAsyncImagePainter
-import com.freez.onlineshopping.domain.product.impl.GetProductListUseCaseImpl
 import com.freez.onlineshopping.domain.product.model.Product
 
 
 @Composable
 fun ProductListScreen() {
-    val viewModel: ProductListViewModel = ProductListViewModel(GetProductListUseCaseImpl())
-    val products by viewModel.products.collectAsState()
-
+    val viewModel = viewModel<ProductListViewModel>()
+    val products by viewModel.products.collectAsStateWithLifecycle()
+    Log.d("ProductListScreen", "ProductListScreen: ssssssssssssssssss")
     LazyVerticalGrid(
         columns = GridCells.Fixed(2),
         modifier = Modifier.fillMaxSize()
@@ -52,13 +54,14 @@ fun ProductListScreen() {
         items(products) { product ->
             ProductCard(product, {})
         }
+        Log.d("ProductListScreen", "ProductListScreen: ")
     }
 }
 
 @Preview(showBackground = true)
 @Composable
 fun ProductListScreenPreview() {
-    Text(text = "salam")
+    ProductListScreen()
 //    val viewModel: ProductListViewModel = hiltViewModel()
 //    // Create mock data for preview
 //    val mockViewModel = object : ProductListViewModel {
@@ -81,6 +84,7 @@ fun ProductListScreenPreview() {
 
 @Composable
 fun ProductCard(product: Product, onMoreDetailClick: (Long) -> Unit) {
+    Log.d("ProductListScreen", "ProductCard: ")
     Card(
         modifier = Modifier
             .padding(16.dp)
