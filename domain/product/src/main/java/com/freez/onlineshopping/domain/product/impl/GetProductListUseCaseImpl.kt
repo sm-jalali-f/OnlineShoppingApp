@@ -1,16 +1,15 @@
 package com.freez.onlineshopping.domain.product.impl
 
 import com.freez.onlineshopping.data.product.ProductListRepository
-import com.freez.onlineshopping.data.product.ProductListRepositoryImpl
 import com.freez.onlineshopping.data.product.model.ProductDao
 import com.freez.onlineshopping.domain.product.GetProductListUseCase
 import com.freez.onlineshopping.domain.product.model.Product
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.map
+import javax.inject.Inject
 
-class GetProductListUseCaseImpl() :
+class GetProductListUseCaseImpl @Inject constructor(private val productRepository: ProductListRepository) :
     GetProductListUseCase {
-    private val productRepository: ProductListRepository=ProductListRepositoryImpl()
     override suspend fun execute(): Flow<List<Product>> {
         val allProductDao = productRepository.getAllProducts()
         return allProductDao.map { productDaoList -> productDaoList.map { p -> p.toProduct() } }

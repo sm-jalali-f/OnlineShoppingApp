@@ -3,8 +3,9 @@ package com.freez.onlineshopping.data.product
 import com.freez.onlineshopping.data.product.model.ProductDao
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import javax.inject.Inject
 
-class ProductListRepositoryImpl : ProductListRepository {
+class ProductListRepositoryImpl @Inject constructor() : ProductListRepository {
     override suspend fun getAllProducts(): Flow<List<ProductDao>> {
         return flow {
             // Simulate fetching data (API or database)
