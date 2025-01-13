@@ -1,3 +1,4 @@
+package com.freez.onlineshopping.feature.productList
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Arrangement
@@ -35,11 +36,13 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import coil3.compose.rememberAsyncImagePainter
-import com.freez.onlineShopping.feature.productlist.ProductListViewModel
+import com.freez.onlineshopping.domain.product.impl.GetProductListUseCaseImpl
 import com.freez.onlineshopping.domain.product.model.Product
 
+
 @Composable
-fun ProductListScreen(viewModel: ProductListViewModel) {
+fun ProductListScreen() {
+    val viewModel: ProductListViewModel = ProductListViewModel(GetProductListUseCaseImpl())
     val products by viewModel.products.collectAsState()
 
     LazyVerticalGrid(

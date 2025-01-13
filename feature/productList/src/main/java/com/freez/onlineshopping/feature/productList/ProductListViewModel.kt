@@ -1,4 +1,5 @@
-package com.freez.onlineShopping.feature.productlist
+package com.freez.onlineshopping.feature.productList
+
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

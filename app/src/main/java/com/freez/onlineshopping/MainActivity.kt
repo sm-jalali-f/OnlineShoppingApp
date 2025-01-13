@@ -1,6 +1,5 @@
 package com.freez.onlineshopping
 
-import ProductListScreen
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -12,7 +11,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.viewmodel.compose.viewModel
-import com.freez.onlineShopping.feature.productlist.ProductListViewModel
+import com.freez.onlineshopping.feature.productList.ProductListScreen
+import com.freez.onlineshopping.feature.productList.ProductListViewModel
 import com.freez.onlineshopping.ui.theme.OnlineShoppingTheme
 
 class MainActivity : ComponentActivity() {
@@ -21,9 +21,9 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             OnlineShoppingTheme {
-                val viewModel: ProductListViewModel = viewModel()
+
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    ProductListScreen(viewModel)
+                    ProductListScreen()
                 }
             }
         }

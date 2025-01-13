@@ -3,17 +3,17 @@ plugins {
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
     kotlin("kapt")
-//    alias(libs.plugins.android.dynamic.feature)
 }
+
 android {
-    namespace = "com.freez.onlineshopping.feature.productlist"
+    namespace = "com.freez.onlineshopping.feature.productList"
     compileSdk = 35
 
     defaultConfig {
         minSdk = 24
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
-
+        consumerProguardFiles("consumer-rules.pro")
     }
 
     buildTypes {
@@ -31,9 +31,16 @@ android {
         jvmTarget = "11"
     }
 }
+
 dependencies {
+
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.material)
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.junit)
+    androidTestImplementation(libs.androidx.espresso.core)
     implementation(project(":domain:product"))
-//    implementation(project(":app"))
     implementation(libs.kotlinx.coroutines.android)
     implementation(libs.kotlinx.coroutines.core)
     implementation(libs.lifecycle.viewmodel.compose)
@@ -42,5 +49,5 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.foundation)
     implementation(libs.androidx.material3)
-    implementation("io.coil-kt.coil3:coil-compose:3.0.4")
+    implementation(libs.coil.compose)
 }
