@@ -17,4 +17,10 @@ object ProductDomainModule {
         return GetProductListUseCaseImpl(repository)
     }
 
+    @Provides
+    fun provideProductListRepository(): ProductListRepository {
+        return ProductListRepositoryImpl()
+
+    }
+
 }

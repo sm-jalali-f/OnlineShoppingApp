@@ -19,6 +19,6 @@ kapt {
 dependencies {
     implementation(project(":data:product"))
     implementation(libs.kotlinx.coroutines.android)
-    implementation(libs.hilt.core)
-    implementation(libs.hilt.compiler)
+//    implementation(libs.hilt.core)
+//    implementation(libs.hilt.compiler)
 }
