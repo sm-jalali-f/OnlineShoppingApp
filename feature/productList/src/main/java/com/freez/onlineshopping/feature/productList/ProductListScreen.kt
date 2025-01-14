@@ -2,11 +2,13 @@ package com.freez.onlineshopping.feature.productList
 
 import android.util.Log
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.defaultMinSize
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
@@ -32,19 +34,23 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import coil3.compose.AsyncImage
+import coil3.compose.LocalPlatformContext
 import coil3.compose.rememberAsyncImagePainter
+import coil3.compose.rememberConstraintsSizeResolver
+import coil3.request.ImageRequest
 import com.freez.onlineshopping.domain.product.model.Product
 
 
 @Composable
 fun ProductListScreen(viewModel: ProductListViewModel = hiltViewModel<ProductListViewModel>()) {
     val products by viewModel.products.collectAsStateWithLifecycle()
-    Log.d("ProductListScreen", "ProductListScreen: ssssssssssssssssss")
     LazyVerticalGrid(
         columns = GridCells.Fixed(2),
         modifier = Modifier.fillMaxSize()
@@ -82,7 +88,12 @@ fun ProductListScreenPreview() {
 
 @Composable
 fun ProductCard(product: Product, onMoreDetailClick: (Long) -> Unit) {
-    Log.d("ProductListScreen", "ProductCard: ")
+    val painter = rememberAsyncImagePainter(
+        model = ImageRequest.Builder(LocalContext.current)
+            .data(product.imageUrl)
+            .size(coil3.size.Size.ORIGINAL) // Set the target size to load the image at.
+            .build()
+    )
     Card(
         modifier = Modifier
             .padding(16.dp)
@@ -95,13 +106,13 @@ fun ProductCard(product: Product, onMoreDetailClick: (Long) -> Unit) {
         ) {
             // Product Image
             Image(
-                painter = rememberAsyncImagePainter(product.imageUrl),
-                contentDescription = null,
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(180.dp)
-                    .clip(RoundedCornerShape(16.dp)),
-                contentScale = ContentScale.Crop
+                    .height(104.dp)
+                    .clip(RoundedCornerShape(size = 8.dp)),
+                painter = painter,
+                contentScale = ContentScale.Crop,
+                contentDescription = "photo"
             )
 
             Spacer(modifier = Modifier.height(8.dp))
@@ -109,7 +120,7 @@ fun ProductCard(product: Product, onMoreDetailClick: (Long) -> Unit) {
             // Product Name
             Text(
                 text = product.name,
-                style = MaterialTheme.typography.headlineLarge,
+                style = MaterialTheme.typography.bodyLarge,
                 maxLines = 1,
                 overflow = TextOverflow.Ellipsis
             )
@@ -122,7 +133,7 @@ fun ProductCard(product: Product, onMoreDetailClick: (Long) -> Unit) {
             ) {
                 Text(
                     text = product.price.toString(),
-                    style = MaterialTheme.typography.bodyLarge,
+                    style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.primary
                 )
                 /*    Spacer(modifier = Modifier.width(8.dp))
