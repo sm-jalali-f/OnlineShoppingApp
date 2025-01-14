@@ -69,8 +69,7 @@ fun ProductListScreen(
 @Composable
 fun ProductCard(product: Product, onMoreDetailClick: (Long) -> Unit) {
     val painter = rememberAsyncImagePainter(
-        model = ImageRequest.Builder(LocalContext.current)
-            .data(product.imageUrl)
+        model = ImageRequest.Builder(LocalContext.current).data(product.imageUrl)
             .size(coil3.size.Size.ORIGINAL) // Set the target size to load the image at.
             .build()
     )

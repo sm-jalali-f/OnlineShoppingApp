@@ -1,4 +1,8 @@
 package com.freez.onlineshopping.domain.productDetail
 
-class GetProductDetailUseCase {
+import kotlinx.coroutines.flow.Flow
+
+interface GetProductDetailUseCase {
+
+    fun execute(productId: Long): ProductDetail
 }
