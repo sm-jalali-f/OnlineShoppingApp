@@ -49,11 +49,15 @@ import com.freez.onlineshopping.domain.product.model.Product
 
 
 @Composable
-fun ProductListScreen(viewModel: ProductListViewModel = hiltViewModel<ProductListViewModel>()) {
+fun ProductListScreen(
+    modifier: Modifier = Modifier,
+    viewModel: ProductListViewModel = hiltViewModel<ProductListViewModel>()
+) {
     val products by viewModel.products.collectAsStateWithLifecycle()
     LazyVerticalGrid(
+        modifier = modifier.fillMaxSize(),
         columns = GridCells.Fixed(2),
-        modifier = Modifier.fillMaxSize()
+        verticalArrangement = Arrangement.spacedBy(0.dp)
     ) {
         items(products) { product ->
             ProductCard(product, {})
@@ -61,30 +65,6 @@ fun ProductListScreen(viewModel: ProductListViewModel = hiltViewModel<ProductLis
         Log.d("ProductListScreen", "ProductListScreen: ")
     }
 }
-
-@Preview(showBackground = true)
-@Composable
-fun ProductListScreenPreview() {
-    ProductListScreen()
-//    val viewModel: ProductListViewModel = hiltViewModel()
-//    // Create mock data for preview
-//    val mockViewModel = object : ProductListViewModel {
-//        override val products: StateFlow<List<Product>> = MutableStateFlow(
-//            listOf(
-//                Product(1, "Baked Bread", 29.99, 2.2, "url", 4.5),
-//                Product(2, "Fresh Soup", 19.99, 4.3, "url", 4.0)
-//            )
-//        )
-//
-//        override fun loadProductList() {
-//            // Do nothing in the preview
-//        }
-//    }
-//
-//    // Pass the mock view model to your ProductListScreen for preview purposes
-//    ProductListScreen(viewModel = mockViewModel)
-}
-
 
 @Composable
 fun ProductCard(product: Product, onMoreDetailClick: (Long) -> Unit) {
@@ -96,10 +76,13 @@ fun ProductCard(product: Product, onMoreDetailClick: (Long) -> Unit) {
     )
     Card(
         modifier = Modifier
-            .padding(16.dp)
+            .padding(8.dp)
             .fillMaxWidth(),
-        elevation = CardDefaults.cardElevation(defaultElevation = 5.dp),
-        shape = RoundedCornerShape(16.dp)
+        colors = CardDefaults.cardColors(
+            containerColor = Color.White,
+        ),
+        elevation = CardDefaults.cardElevation(defaultElevation = 3.dp),
+        shape = RoundedCornerShape(8.dp)
     ) {
         Column(
             modifier = Modifier.padding(16.dp)
@@ -111,7 +94,7 @@ fun ProductCard(product: Product, onMoreDetailClick: (Long) -> Unit) {
                     .height(104.dp)
                     .clip(RoundedCornerShape(size = 8.dp)),
                 painter = painter,
-                contentScale = ContentScale.Crop,
+                contentScale = ContentScale.Fit,
                 contentDescription = "photo"
             )
 
@@ -132,18 +115,10 @@ fun ProductCard(product: Product, onMoreDetailClick: (Long) -> Unit) {
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 Text(
-                    text = product.price.toString(),
+                    text = "$${product.price}",
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.primary
                 )
-                /*    Spacer(modifier = Modifier.width(8.dp))
-                    Text(
-                        text = oldPrice,
-                        style = MaterialTheme.typography.body2.copy(
-                            textDecoration = TextDecoration.LineThrough
-                        ),
-                        color = Color.Gray
-                    )*/
             }
 
             Spacer(modifier = Modifier.height(8.dp))
@@ -156,7 +131,7 @@ fun ProductCard(product: Product, onMoreDetailClick: (Long) -> Unit) {
                 overflow = TextOverflow.Ellipsis
             )
 
-            Spacer(modifier = Modifier.height(8.dp))
+            /*Spacer(modifier = Modifier.height(8.dp))
 
             // Favorite and Buy Button
             Row(
@@ -164,7 +139,7 @@ fun ProductCard(product: Product, onMoreDetailClick: (Long) -> Unit) {
                 horizontalArrangement = Arrangement.SpaceBetween,
                 verticalAlignment = Alignment.CenterVertically
             ) {
-                IconButton(onClick = { /* Handle favorite */ }) {
+                IconButton(onClick = { *//* Handle favorite *//* }) {
                     Icon(
                         imageVector = if (product.isFavorite) Icons.Default.Favorite else Icons.Default.FavoriteBorder,
                         contentDescription = null,
@@ -179,7 +154,13 @@ fun ProductCard(product: Product, onMoreDetailClick: (Long) -> Unit) {
                 ) {
                     Text(text = "BUY NOW")
                 }
-            }
+            }*/
         }
     }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun ProductListScreenPreview() {
+    ProductListScreen()
 }
